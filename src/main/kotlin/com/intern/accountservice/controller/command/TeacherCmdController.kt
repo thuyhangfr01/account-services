@@ -6,10 +6,10 @@ import com.intern.accountservice.cqrs.command.exceptions.StudentCmdException
 import com.intern.accountservice.cqrs.command.exceptions.TeacherCmdException
 import com.intern.accountservice.cqrs.command.repositories.StudentCmdRepository
 import com.intern.accountservice.cqrs.command.repositories.TeacherCmdRepository
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
@@ -21,5 +21,19 @@ class TeacherCmdController (val teacherCmdRepository: TeacherCmdRepository) {
             teacherCmd.username.isNullOrEmpty() || teacherCmd.pass.isNullOrEmpty())
             throw TeacherCmdException("Please complete all information!")
         else return teacherCmdRepository.save(teacherCmd)
+    }
+
+    //update status
+    @PutMapping("/teacher/status/{id}")
+    fun updateStatusById(
+        @PathVariable(value = "id") teacherId: Long,
+        @Valid @RequestBody newStatus: TeacherCmd): ResponseEntity<TeacherCmd> {
+
+        if(teacherCmdRepository.findByIdOrNull(teacherId) == null) throw TeacherCmdException("Page not found!")
+        else return teacherCmdRepository.findById(teacherId).map { existingTeacher ->
+            val updatedTeacher: TeacherCmd = existingTeacher
+                .copy(status = newStatus.status)
+            ResponseEntity.ok().body(teacherCmdRepository.save(updatedTeacher))
+        }.orElse(ResponseEntity.notFound().build())
     }
 }
