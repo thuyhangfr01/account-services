@@ -15,7 +15,7 @@ data class TeacherCmd(
     var age: Int? = 0,
 
     @Column(name = "gender")
-    var gender: String? = "",
+    var gender: String? = "0",
 
     @Column(name = "address")
     var address: String? = "",
@@ -36,5 +36,5 @@ data class TeacherCmd(
     var pass: String? = "",
 
     @Column(name = "statuss")
-    var status: String? = ""
+    var status: String? = "0"
 )
