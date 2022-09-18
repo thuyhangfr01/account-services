@@ -37,11 +37,11 @@ class RegistrationController(private val userService: UserService) {
     fun register(@RequestBody body: UserRegistrationDto) : ResponseEntity<User>{
         val user = User()
         user.name = body.name
-        user.age = body.age
-        user.gender = body.gender
-        user.address = body.address
+//        user.age = body.age
+//        user.gender = body.gender
+//        user.address = body.address
         user.phone = body.phone
-        user.avatar = body.avatar
+//        user.avatar = body.avatar
         user.email = body.email
         user.password = body.password
         return ResponseEntity.ok(this.userService.save(user))
