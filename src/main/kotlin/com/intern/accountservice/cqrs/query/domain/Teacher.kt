@@ -6,7 +6,7 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "teachers")
+@Table(name = "teacher")
 data class Teacher(
     @Id
     var id: Long? = 1,
@@ -32,12 +32,15 @@ data class Teacher(
     @Column(name = "avatar")
     var avatar: String? = "",
 
-    @Column(name = "username")
-    var username: String? = "",
-
-    @Column(name = "pass")
-    var pass: String? = "",
+//    @Column(name = "username")
+//    var username: String? = "",
+//
+//    @Column(name = "pass")
+//    var pass: String? = "",
 
     @Column(name = "statuss")
-    var status: String? = ""
+    var status: String? = "",
+
+    @Column(name = "accountId")
+    var account_id: Int? = 0
 )
