@@ -61,7 +61,7 @@ class User {
 
     @Column(name = "pass")
     var password: String? = ""
-//        @JsonIgnore
+        //@JsonIgnore
 //        get() = field
 //        set(value) {
 //            val passwordEncoder = BCryptPasswordEncoder()

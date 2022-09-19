@@ -19,9 +19,19 @@ public class UserController {
         return userService!!.initRoleAndUser()
     }
 
-    @PostMapping("/registerNewUser")
-    fun registerNewUser(@RequestBody user: User?): User? {
-        return userService!!.registerNewUser(user!!)
+    @PostMapping("/registerNewAdmin")
+    fun registerNewAdmin(@RequestBody user: User?): User? {
+        return userService!!.registerNewAdmin(user!!)
+    }
+
+    @PostMapping("/registerNewStudent")
+    fun registerNewStudent(@RequestBody user: User?): User? {
+        return userService!!.registerNewStudent(user!!)
+    }
+
+    @PostMapping("/registerNewTeacher")
+    fun registerNewTeacher(@RequestBody user: User?): User? {
+        return userService!!.registerNewTeacher(user!!)
     }
 
     @GetMapping("/forAdmin")
