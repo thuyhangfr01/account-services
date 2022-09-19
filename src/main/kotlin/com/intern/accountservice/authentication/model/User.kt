@@ -33,6 +33,9 @@ class User {
     @Column(name = "email", unique = true)
     var email: String? = ""
 
+    @Column(name = "username", unique = true)
+    var username: String? = ""
+
     @Column(name = "pass")
     var password: String? = ""
         @JsonIgnore
