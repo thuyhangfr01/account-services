@@ -6,6 +6,4 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-public interface RoleRepository : CrudRepository<Role, String> {
-
-}
+interface RoleRepository : JpaRepository<Role, Long>

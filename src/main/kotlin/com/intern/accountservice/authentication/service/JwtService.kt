@@ -22,13 +22,13 @@ import java.util.*
 @Service
 class JwtService : UserDetailsService {
     @Autowired
-    private val jwtUtil: JwtUtil? = null
+    lateinit var jwtUtil: JwtUtil
 
     @Autowired
-    private val userRepository: UserRepository? = null
+    lateinit var userRepository: UserRepository
 
     @Autowired
-    private val authenticationManager: AuthenticationManager? = null
+    lateinit var authenticationManager: AuthenticationManager
 
     @Throws(Exception::class)
     fun createJwtToken(jwtRequest: JwtRequest): JwtResponse? {
@@ -37,19 +37,21 @@ class JwtService : UserDetailsService {
         authenticate(userName, userPassword)
         val userDetails = loadUserByUsername(userName)
         val newGeneratedToken = jwtUtil!!.generateToken(userDetails)
-        val user: User = userRepository!!.findById(userName!!).get()
+        val user: User = userRepository!!.findByUserName(userName!!)!!
         return JwtResponse(user, newGeneratedToken!!)
     }
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(username: String?): UserDetails {
-        val user: User = userRepository!!.findById(username!!).get()
-        return if (user != null) {
+    override fun loadUserByUsername (username: String?): UserDetails {
+        val user: User = userRepository!!.findByUserName(username!!)!!
+        return if (user != null)
+        {
             org.springframework.security.core.userdetails.User(
-                user.username,
+                user.userName,
                 user.password,
                 getAuthority(user)
             )
+
         } else {
             throw UsernameNotFoundException("User not found with username: $username")
         }

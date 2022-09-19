@@ -25,7 +25,7 @@ class JwtRequestFilter : OncePerRequestFilter() {
     private val jwtService: JwtService? = null
 
     @Throws(ServletException::class, IOException::class)
-    override protected fun doFilterInternal(
+    override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         filterChain: FilterChain

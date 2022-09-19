@@ -10,7 +10,7 @@ import java.util.function.Function
 
 @Component
 class JwtUtil {
-    private val SECRET_KEY = "hahahahaha"
+    private val SECRET_KEY = "learn_programming_yourself"
 
     private val TOKEN_VALIDITY = 3600 * 5
 
@@ -42,14 +42,15 @@ class JwtUtil {
     }
 
     fun generateToken(userDetails: UserDetails): String? {
-        val claims: kotlin.collections.Map<String, Any> = HashMap()
-        return Jwts.builder()
+        var claims: Map<String, Any> = HashMap()
+        var token = Jwts.builder()
             .setClaims(claims)
             .setSubject(userDetails.username)
             .setIssuedAt(Date(System.currentTimeMillis()))
             .setExpiration(Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
             .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
             .compact()
+        return token
     }
 
 }

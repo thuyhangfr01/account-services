@@ -25,19 +25,19 @@ public class UserController {
     }
 
     @GetMapping("/forAdmin")
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun forAdmin(): String? {
         return "This URL is only accessible to the admin"
     }
 
     @GetMapping("/forStudent")
-    @PreAuthorize("hasRole('Student')")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     fun forStudent(): String? {
         return "This URL is only accessible to the student"
     }
 
     @GetMapping("/forTeacher")
-    @PreAuthorize("hasRole('Teacher')")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     fun forTeacher(): String? {
         return "This URL is only accessible to the teacher"
     }

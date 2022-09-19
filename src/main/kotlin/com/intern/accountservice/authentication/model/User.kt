@@ -54,19 +54,19 @@ class User {
         }
 
     @Column(name = "username")
-    var username: String? = ""
+    var userName: String? = ""
         set(value) {
             if(value!!.isNotEmpty())  field = value
         }
 
     @Column(name = "pass")
     var password: String? = ""
-        @JsonIgnore
-        get() = field
-        set(value) {
-            val passwordEncoder = BCryptPasswordEncoder()
-            field = passwordEncoder.encode(value)
-        }
+//        @JsonIgnore
+//        get() = field
+//        set(value) {
+//            val passwordEncoder = BCryptPasswordEncoder()
+//            field = passwordEncoder.encode(value)
+//        }
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
