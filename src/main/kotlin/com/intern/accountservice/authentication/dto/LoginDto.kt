@@ -1,6 +1,6 @@
 package com.intern.accountservice.authentication.dto
 
 class LoginDto {
-    val email = ""
+    val username = ""
     val password = ""
 }

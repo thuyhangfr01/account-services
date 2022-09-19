@@ -8,6 +8,7 @@ class UserRegistrationDto {
     var phone: String? = null
     var avatar: String? = null
     var email: String? = null
+    var username: String? = null
     var password: String? = null
 
     constructor() {}
@@ -19,6 +20,7 @@ class UserRegistrationDto {
         phone: String?,
         avatar: String?,
         email: String?,
+        username: String?,
         password: String?
     ) {
         this.name = name
@@ -28,6 +30,7 @@ class UserRegistrationDto {
         this.phone = phone
         this.avatar = avatar
         this.email = email
+        this.username = username
         this.password = password
     }
 
