@@ -59,9 +59,6 @@ class User {
             if(value!!.isNotEmpty())  field = value
         }
 
-    @Column(name = "username", unique = true)
-    var username: String? = ""
-
     @Column(name = "pass")
     var password: String? = ""
         //@JsonIgnore
