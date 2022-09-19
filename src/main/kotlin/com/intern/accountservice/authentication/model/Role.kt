@@ -16,4 +16,6 @@ class Role {
     constructor(name: String?) : super() {
         this.name = name
     }
+
+
 }
