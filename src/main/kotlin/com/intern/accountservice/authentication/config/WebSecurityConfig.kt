@@ -43,12 +43,16 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         httpSecurity.csrf().disable()
             .authorizeRequests().antMatchers("/api/authenticate", "/api/registerNewAdmin", "/api/registerNewStudent","/api/registerNewTeacher").permitAll()
             .antMatchers(HttpHeaders.ALLOW).permitAll()
-            .antMatchers("/**").permitAll()
-            .antMatchers("/forAdmin").hasAnyAuthority("ROLE_ADMIN", "ROLE_STUDENT", "ROLE_TEACHER")
-            .antMatchers("/forStudent").hasAuthority("ROLE_STUDENT")
-            .antMatchers("/forTeacher").hasAuthority("ROLE_TEACHER")
+            .antMatchers("/v3/api-docs/**", "/configuration/ui", "/swagger-resources",
+                    "/configuration/security", "/swagger-ui.html", "/webjars/**",
+                    "/swagger-resources/configuration/ui","/swagger-ui/index.html",
+                    "/swagger-ui/**").permitAll()
+            .antMatchers("/api/forStudent").hasRole("STUDENT")
+            .antMatchers("/api/forTeacher").hasRole("TEACHER")
+            .antMatchers("/api/forAdmin").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
+//            .antMatchers("/swagger-ui/index.html#/").permitAll()
             .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

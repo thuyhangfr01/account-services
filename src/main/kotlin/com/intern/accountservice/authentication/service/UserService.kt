@@ -22,20 +22,6 @@ class UserService() {
     @Autowired
     private val passwordEncoder: PasswordEncoder? = null
 
-    fun initRoleAndUser() {
-        val adminRole = Role()
-        adminRole.name = "ROLE_ADMIN"
-        roleRepository?.save(adminRole)
-
-        val studentRole = Role()
-        studentRole.name = "ROLE_STUDENT"
-        roleRepository?.save(studentRole)
-
-        val teacherRole = Role()
-        teacherRole.name = "ROLE_TEACHER"
-        roleRepository?.save(teacherRole)
-    }
-
     fun registerNewAdmin(user: User): User? {
         val role: Role = roleRepository?.findById(1)!!.get()
         val adminRoles: MutableSet<Role?> = HashSet()
