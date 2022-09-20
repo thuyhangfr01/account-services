@@ -28,6 +28,8 @@ dependencies {
 	implementation("com.nimbusds:nimbus-jose-jwt:9.24.4")
 	implementation("com.google.code.gson:gson:2.9.0")
 
+//	implementation("io.springfox:springfox-boot-starter:3.0.0")
+
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("mysql:mysql-connector-java")

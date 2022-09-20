@@ -43,6 +43,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         httpSecurity.csrf().disable()
             .authorizeRequests().antMatchers("/api/authenticate", "/api/registerNewAdmin", "/api/registerNewStudent","/api/registerNewTeacher").permitAll()
             .antMatchers(HttpHeaders.ALLOW).permitAll()
+            .antMatchers("/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
