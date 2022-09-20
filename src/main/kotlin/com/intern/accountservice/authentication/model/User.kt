@@ -47,7 +47,7 @@ class User {
             if(value!!.isNotEmpty())  field = value
         }
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     var email: String? = ""
         set(value) {
             if(value!!.isNotEmpty())  field = value
