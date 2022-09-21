@@ -5,6 +5,7 @@ import com.intern.accountservice.authentication.model.JwtResponse
 import com.intern.accountservice.authentication.service.JwtService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 
 @RestController
@@ -16,7 +17,7 @@ class JwtController {
 
     @PostMapping("/authenticate")
     @Throws(Exception::class)
-    fun createJwtToken(@RequestBody jwtRequest: JwtRequest?): JwtResponse? {
+    fun createJwtToken(@Valid @RequestBody jwtRequest: JwtRequest?): JwtResponse? {
         return jwtService!!.createJwtToken(jwtRequest!!)
     }
 }
