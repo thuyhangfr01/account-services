@@ -3,9 +3,11 @@ package com.intern.accountservice.authentication.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name = "user", uniqueConstraints = [UniqueConstraint(columnNames = ["email"])])
+@Table(name = "user")
 class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,18 +49,22 @@ class User {
             if(value!!.isNotEmpty())  field = value
         }
 
+    @Email
+    @NotBlank(message = "Email is mandatory!")
     @Column(name = "email")
     var email: String? = ""
         set(value) {
             if(value!!.isNotEmpty())  field = value
         }
 
-    @Column(name = "username")
+    @NotBlank(message = "Username is mandatory!")
+    @Column(name = "username", unique = true)
     var userName: String? = ""
         set(value) {
             if(value!!.isNotEmpty())  field = value
         }
 
+    @NotBlank(message = "Password is mandatory!")
     @Column(name = "pass")
     var password: String? = ""
         //@JsonIgnore
