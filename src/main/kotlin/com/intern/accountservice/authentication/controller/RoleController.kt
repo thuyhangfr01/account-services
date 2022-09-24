@@ -1,6 +1,6 @@
 package com.intern.accountservice.authentication.controller
 
-import com.intern.accountservice.authentication.model.Role
+import com.intern.accountservice.authentication.entity.Role
 import com.intern.accountservice.authentication.service.RoleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping

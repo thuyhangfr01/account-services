@@ -1,4 +1,4 @@
-package com.intern.accountservice.authentication.model
+package com.intern.accountservice.authentication.entity
 
 class JwtRequest {
     var userName: String? = null

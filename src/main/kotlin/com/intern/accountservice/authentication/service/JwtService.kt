@@ -1,8 +1,8 @@
 package com.intern.accountservice.authentication.service
 
-import com.intern.accountservice.authentication.model.JwtRequest
-import com.intern.accountservice.authentication.model.JwtResponse
-import com.intern.accountservice.authentication.model.User
+import com.intern.accountservice.authentication.entity.JwtRequest
+import com.intern.accountservice.authentication.entity.JwtResponse
+import com.intern.accountservice.authentication.entity.User
 import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.util.JwtUtil
 import org.springframework.beans.factory.annotation.Autowired

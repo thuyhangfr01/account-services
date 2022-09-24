@@ -1,8 +1,8 @@
 package com.intern.accountservice.authentication.service
 
 import com.intern.accountservice.authentication.exception.AccountException
-import com.intern.accountservice.authentication.model.Role
-import com.intern.accountservice.authentication.model.User
+import com.intern.accountservice.authentication.entity.Role
+import com.intern.accountservice.authentication.entity.User
 import com.intern.accountservice.authentication.repository.RoleRepository
 import com.intern.accountservice.authentication.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -73,6 +73,7 @@ class UserService() {
         }
         return userRepository!!.save(user)
     }
+
 
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)

@@ -1,19 +1,21 @@
 package com.intern.accountservice.authentication.controller
 
-import com.intern.accountservice.authentication.model.User
+import com.intern.accountservice.authentication.entity.User
+import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.annotation.PostConstruct
-
+import java.util.*
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
     @Autowired
     lateinit var userService: UserService
+
+    @Autowired
+    lateinit var userRepository: UserRepository
 
     @PostMapping("/registerNewAdmin")
     fun registerNewAdmin(@RequestBody user: User?): User? {
@@ -47,4 +49,27 @@ public class UserController {
     fun forTeacher(): String? {
         return "This URL is only accessible to the teacher"
     }
+
+    @PutMapping("/users/{id}")
+    fun updateUserById(@PathVariable(value = "id") userId: Int,
+                           @RequestBody newUser: User):
+            ResponseEntity<User> {
+
+        return userRepository.findById(userId.toLong()).map { existingUser ->
+            val updatedUser: User = existingUser
+                .copy(  name = newUser.name,
+                        age = newUser.age,
+                        gender = newUser.gender,
+                        address = newUser.address,
+                        phone = newUser.phone,
+                        avatar = newUser.avatar,
+                        email = newUser.email,
+                        userName = newUser.userName,
+                        password = newUser.password
+                )
+            ResponseEntity.ok().body(userRepository.save(updatedUser))
+        }.orElse(ResponseEntity.notFound().build())
+
+    }
+
 }
