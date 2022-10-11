@@ -1,5 +1,6 @@
 package com.intern.accountservice.authentication.controller
 
+import com.intern.accountservice.authentication.entity.Degree
 import com.intern.accountservice.authentication.entity.User
 import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.service.UserService
@@ -50,26 +51,10 @@ public class UserController {
         return "This URL is only accessible to the teacher"
     }
 
-    @PutMapping("/users/{id}")
-    fun updateUserById(@PathVariable(value = "id") userId: Int,
-                           @RequestBody newUser: User):
-            ResponseEntity<User> {
-
-        return userRepository.findById(userId.toLong()).map { existingUser ->
-            val updatedUser: User = existingUser
-                .copy(  name = newUser.name,
-                        age = newUser.age,
-                        gender = newUser.gender,
-                        address = newUser.address,
-                        phone = newUser.phone,
-                        avatar = newUser.avatar,
-                        email = newUser.email,
-                        userName = newUser.userName,
-                        password = newUser.password
-                )
-            ResponseEntity.ok().body(userRepository.save(updatedUser))
-        }.orElse(ResponseEntity.notFound().build())
-
+    @PostMapping("/addDegree")
+    fun addDegree(
+        @RequestBody degree: Degree
+    ): ResponseEntity<Degree>? {
+        return userService.addDegree(degree)
     }
-
 }
