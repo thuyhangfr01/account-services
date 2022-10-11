@@ -1,4 +1,4 @@
-package com.intern.accountservice.authentication.model
+package com.intern.accountservice.authentication.entity
 
 import javax.persistence.*
 

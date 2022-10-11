@@ -1,6 +1,5 @@
-package com.intern.accountservice.authentication.model
+package com.intern.accountservice.authentication.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.persistence.*
 import javax.validation.constraints.Email

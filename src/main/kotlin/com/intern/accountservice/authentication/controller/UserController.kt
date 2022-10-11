@@ -1,19 +1,22 @@
 package com.intern.accountservice.authentication.controller
 
-import com.intern.accountservice.authentication.model.User
+import com.intern.accountservice.authentication.entity.Degree
+import com.intern.accountservice.authentication.entity.User
+import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.annotation.PostConstruct
-
+import java.util.*
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
     @Autowired
     lateinit var userService: UserService
+
+    @Autowired
+    lateinit var userRepository: UserRepository
 
     @PostMapping("/registerNewAdmin")
     fun registerNewAdmin(@RequestBody user: User?): User? {
@@ -46,5 +49,12 @@ public class UserController {
     //@PreAuthorize("hasRole(3)")
     fun forTeacher(): String? {
         return "This URL is only accessible to the teacher"
+    }
+
+    @PostMapping("/addDegree")
+    fun addDegree(
+        @RequestBody degree: Degree
+    ): ResponseEntity<Degree>? {
+        return userService.addDegree(degree)
     }
 }

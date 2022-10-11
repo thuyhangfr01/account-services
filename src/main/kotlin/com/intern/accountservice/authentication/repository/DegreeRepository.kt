@@ -1,8 +1,10 @@
 package com.intern.accountservice.authentication.repository
 
-import com.intern.accountservice.authentication.entity.Role
+import com.intern.accountservice.authentication.entity.Degree
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
 @Repository
-interface RoleRepository : JpaRepository<Role, Long>
+interface DegreeRepository: JpaRepository<Degree, Long>
+

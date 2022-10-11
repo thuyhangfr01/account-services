@@ -1,11 +1,14 @@
 package com.intern.accountservice.authentication.service
 
+import com.intern.accountservice.authentication.entity.Degree
 import com.intern.accountservice.authentication.exception.AccountException
-import com.intern.accountservice.authentication.model.Role
-import com.intern.accountservice.authentication.model.User
+import com.intern.accountservice.authentication.entity.Role
+import com.intern.accountservice.authentication.entity.User
+import com.intern.accountservice.authentication.repository.DegreeRepository
 import com.intern.accountservice.authentication.repository.RoleRepository
 import com.intern.accountservice.authentication.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.sql.SQLIntegrityConstraintViolationException
@@ -18,6 +21,9 @@ class UserService() {
 
     @Autowired
     private val roleRepository: RoleRepository? = null
+
+    @Autowired
+    private val degreeRepository: DegreeRepository? = null
 
     @Autowired
     private val passwordEncoder: PasswordEncoder? = null
@@ -74,7 +80,13 @@ class UserService() {
         return userRepository!!.save(user)
     }
 
+
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)
     }
+
+    fun addDegree(degree : Degree): ResponseEntity<Degree>?{
+        return ResponseEntity.ok(degreeRepository?.save(degree))
+    }
+
 }
