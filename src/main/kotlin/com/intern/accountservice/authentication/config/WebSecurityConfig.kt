@@ -42,7 +42,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         httpSecurity.cors()
         httpSecurity.csrf().disable()
             .authorizeRequests().antMatchers("/api/authenticate", "/api/registerNewAdmin",
-                "/api/registerNewStudent","/api/registerNewTeacher", "/api/addDegree").permitAll()
+                "/api/registerNewStudent","/api/registerNewTeacher", "/api/addDegree",
+                "/api/updateStudentInfo/**", "/api/updateDegree/**").permitAll()
             .antMatchers(HttpHeaders.ALLOW).permitAll()
             .antMatchers("/v3/api-docs/**", "/configuration/ui", "/swagger-resources",
                     "/configuration/security", "/swagger-ui.html", "/webjars/**",
