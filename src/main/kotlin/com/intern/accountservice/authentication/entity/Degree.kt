@@ -4,50 +4,23 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "degrees_teacher")
-class Degree {
+data class Degree (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-
     @Column(name = "user_id")
-    var userId: Int? = 0
-        set(value) {
-            field = value
-        }
-
-    @Column(name = "role_id")
-    var roleId: Int? = 0
-        set(value) {
-            field = value
-        }
+    var userId: Long? = 0,
 
     @Column(name = "img1")
-    var img1: String? = ""
-        set(value) {
-            if(value!!.isNotEmpty())  field = value
-        }
+    var img1: String? = "",
 
     @Column(name = "img2")
-    var img2: String? = ""
-        set(value) {
-            if(value!!.isNotEmpty())  field = value
-        }
+    var img2: String? = "",
 
     @Column(name = "img3")
-    var img3: String? = ""
-        set(value) {
-            if(value!!.isNotEmpty())  field = value
-        }
+    var img3: String? = "",
 
     @Column(name = "img4")
-    var img4: String? = ""
-        set(value) {
-            if(value!!.isNotEmpty())  field = value
-        }
+    var img4: String? = "",
 
     @Column(name = "img5")
     var img5: String? = ""
-        set(value) {
-            if(value!!.isNotEmpty())  field = value
-        }
-}
+)

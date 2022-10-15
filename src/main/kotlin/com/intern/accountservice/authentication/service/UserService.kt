@@ -34,6 +34,11 @@ class UserService() {
         adminRoles.add(role)
 
         user.name
+        user.age
+        user.gender
+        user.address
+        user.phone
+        user.avatar
         user.email
         user.userName
         user.password = getEncodedPassword(user.password)
@@ -52,6 +57,11 @@ class UserService() {
         studentRoles.add(role)
 
         user.name
+        user.age
+        user.gender
+        user.address
+        user.phone
+        user.avatar
         user.email
         user.userName
         user.password = getEncodedPassword(user.password)
@@ -69,6 +79,11 @@ class UserService() {
         teacherRoles.add(role)
 
         user.name
+        user.age
+        user.gender
+        user.address
+        user.phone
+        user.avatar
         user.email
         user.userName
         user.password = getEncodedPassword(user.password)
@@ -80,6 +95,22 @@ class UserService() {
         return userRepository!!.save(user)
     }
 
+    fun updateUserInfo(idUser: Long, user: User?): ResponseEntity<User> {
+        return userRepository?.findById(idUser)?.map { existingUser ->
+            val updateUser: User = existingUser
+                .copy(name = user?.name,
+                    age = user?.age,
+                    gender = user?.gender,
+                    address = user?.address,
+                    phone = user?.phone,
+                    avatar = user?.avatar,
+                    email = user?.email,
+                    userName = user?.userName,
+                    password = getEncodedPassword(user?.password))
+            ResponseEntity.ok().body(userRepository?.save(updateUser))
+        }!!.orElse(ResponseEntity.notFound().build())
+    }
+
 
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)
@@ -89,4 +120,16 @@ class UserService() {
         return ResponseEntity.ok(degreeRepository?.save(degree))
     }
 
+    fun updateDegree(idTeacher : Long, degree : Degree?): ResponseEntity<Degree>?{
+        return degreeRepository?.findById(idTeacher)?.map { existingDegree ->
+            val updateDegree: Degree = existingDegree
+                .copy(img1 = degree?.img1,
+                    img2 = degree?.img2,
+                    img3 = degree?.img3,
+                    img4 = degree?.img4,
+                    img5 = degree?.img5
+                )
+            ResponseEntity.ok().body(degreeRepository?.save(updateDegree))
+        }!!.orElse(ResponseEntity.notFound().build())
+    }
 }
