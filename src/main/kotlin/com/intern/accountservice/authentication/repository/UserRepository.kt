@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository
 interface UserRepository : CrudRepository<User, Long> {
     @Query("Select * from user where username like '%:username%'")
     fun findByUserName(@Param("username") username: String?): User?
-
 }

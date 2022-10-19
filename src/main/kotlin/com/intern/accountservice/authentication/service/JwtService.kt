@@ -3,9 +3,13 @@ package com.intern.accountservice.authentication.service
 import com.intern.accountservice.authentication.entity.JwtRequest
 import com.intern.accountservice.authentication.entity.JwtResponse
 import com.intern.accountservice.authentication.entity.User
+import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.util.JwtUtil
+import org.hibernate.annotations.NotFound
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.DisabledException
@@ -17,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
+import org.springframework.security.crypto.password.PasswordEncoder
 
 
 @Service
@@ -30,6 +35,9 @@ class JwtService : UserDetailsService {
     @Autowired
     lateinit var authenticationManager: AuthenticationManager
 
+    @Autowired
+    private val passwordEncoder: PasswordEncoder? = null
+
     @Throws(Exception::class)
     fun createJwtToken(jwtRequest: JwtRequest): JwtResponse? {
         val userName = jwtRequest.userName
@@ -38,7 +46,9 @@ class JwtService : UserDetailsService {
         val userDetails = loadUserByUsername(userName)
         val newGeneratedToken = jwtUtil!!.generateToken(userDetails)
         val user: User = userRepository!!.findByUserName(userName!!)!!
-        return JwtResponse(user, newGeneratedToken!!)
+        val status = HttpStatus.OK
+        return JwtResponse(status, user, newGeneratedToken!!)
+
     }
 
     @Throws(UsernameNotFoundException::class)
@@ -71,8 +81,8 @@ class JwtService : UserDetailsService {
             throw Exception("USER_DISABLED", e)
         } catch (e: BadCredentialsException) {
             throw Exception("INVALID_CREDENTIALS", e)
+        } catch (e: NotFoundException) {
+            throw AccountException("User not found")
         }
     }
-
-
 }
