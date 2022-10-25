@@ -49,6 +49,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     "/configuration/security", "/swagger-ui.html", "/webjars/**",
                     "/swagger-resources/configuration/ui","/swagger-ui/index.html",
                     "/swagger-ui/**").permitAll()
+            .antMatchers("/api/**").permitAll()
             .antMatchers("/api/forStudent").hasRole("STUDENT")
             .antMatchers("/api/forTeacher").hasRole("TEACHER")
             .antMatchers("/api/forAdmin").hasRole("ADMIN")
