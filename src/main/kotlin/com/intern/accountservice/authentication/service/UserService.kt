@@ -111,7 +111,6 @@ class UserService() {
         }!!.orElse(ResponseEntity.notFound().build())
     }
 
-
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)
     }
@@ -130,6 +129,12 @@ class UserService() {
                     img5 = degree?.img5
                 )
             ResponseEntity.ok().body(degreeRepository?.save(updateDegree))
+        }!!.orElse(ResponseEntity.notFound().build())
+    }
+
+    fun getCertificatesByTeacherId(idTeacher: Long): ResponseEntity<Degree> {
+        return degreeRepository?.findById(idTeacher)?.map { existingDegree ->
+            ResponseEntity.ok().body(existingDegree)
         }!!.orElse(ResponseEntity.notFound().build())
     }
 }
