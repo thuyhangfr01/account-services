@@ -6,7 +6,6 @@ import com.intern.accountservice.authentication.entity.User
 import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.repository.UserRepository
 import com.intern.accountservice.authentication.util.JwtUtil
-import org.hibernate.annotations.NotFound
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.HttpStatus
