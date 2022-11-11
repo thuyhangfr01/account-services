@@ -107,8 +107,7 @@ class UserService() {
                     phone = user?.phone,
                     avatar = user?.avatar,
                     email = user?.email,
-                    userName = user?.userName,
-                    password = getEncodedPassword(user?.password))
+                    userName = user?.userName)
             ResponseEntity.ok().body(userRepository?.save(updateUser))
         }!!.orElse(ResponseEntity.notFound().build())
     }
@@ -116,6 +115,4 @@ class UserService() {
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)
     }
-
-
 }
