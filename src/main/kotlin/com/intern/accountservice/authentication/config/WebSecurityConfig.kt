@@ -43,7 +43,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         httpSecurity.csrf().disable()
             .authorizeRequests().antMatchers("/api/authenticate", "/api/registerNewAdmin",
                 "/api/registerNewStudent","/api/registerNewTeacher", "/api/addDegree",
-                "/api/updateStudentInfo/**", "/api/updateDegree/**").permitAll()
+                "/api/updateStudentInfo/**", "/api/updateDegree/**", "/api/user/**", "/api/degree/**").permitAll()
             .antMatchers(HttpHeaders.ALLOW).permitAll()
             .antMatchers("/v3/api-docs/**", "/configuration/ui", "/swagger-resources",
                     "/configuration/security", "/swagger-ui.html", "/webjars/**",

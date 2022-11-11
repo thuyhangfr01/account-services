@@ -1,16 +1,18 @@
 package com.intern.accountservice.authentication.service
 
 import com.intern.accountservice.authentication.entity.Degree
-import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.entity.Role
 import com.intern.accountservice.authentication.entity.User
+import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.repository.DegreeRepository
 import com.intern.accountservice.authentication.repository.RoleRepository
 import com.intern.accountservice.authentication.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.PathVariable
 import java.sql.SQLIntegrityConstraintViolationException
 
 
@@ -111,25 +113,9 @@ class UserService() {
         }!!.orElse(ResponseEntity.notFound().build())
     }
 
-
     fun getEncodedPassword(password: String?): String? {
         return passwordEncoder!!.encode(password)
     }
 
-    fun addDegree(degree : Degree): ResponseEntity<Degree>?{
-        return ResponseEntity.ok(degreeRepository?.save(degree))
-    }
 
-    fun updateDegree(idTeacher : Long, degree : Degree?): ResponseEntity<Degree>?{
-        return degreeRepository?.findById(idTeacher)?.map { existingDegree ->
-            val updateDegree: Degree = existingDegree
-                .copy(img1 = degree?.img1,
-                    img2 = degree?.img2,
-                    img3 = degree?.img3,
-                    img4 = degree?.img4,
-                    img5 = degree?.img5
-                )
-            ResponseEntity.ok().body(degreeRepository?.save(updateDegree))
-        }!!.orElse(ResponseEntity.notFound().build())
-    }
 }

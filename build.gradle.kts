@@ -34,11 +34,13 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("mysql:mysql-connector-java")
+	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.11")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.11")
+	implementation("org.postgresql:postgresql:42.5.0")
 }
 
 tasks.withType<KotlinCompile> {
