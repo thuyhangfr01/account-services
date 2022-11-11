@@ -7,7 +7,7 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 data class User (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +52,4 @@ data class User (
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var role: MutableSet<Role?>? = null
-
 )

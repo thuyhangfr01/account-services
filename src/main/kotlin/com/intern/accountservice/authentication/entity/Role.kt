@@ -3,19 +3,12 @@ package com.intern.accountservice.authentication.entity
 import javax.persistence.*
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    var id: Long? = 0
 
     @Column(name = "namee")
-    var name: String? = null
-
-    constructor() {}
-    constructor(name: String?) : super() {
-        this.name = name
-    }
-
-
+    var name: String? = ""
 }
