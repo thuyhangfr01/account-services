@@ -4,12 +4,12 @@ import com.intern.accountservice.authentication.entity.Degree
 import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.repository.DegreeRepository
 import com.intern.accountservice.authentication.repository.UserRepository
-import com.intern.accountservice.authentication.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
+
 
 @RestController
 @RequestMapping("/api")
@@ -20,19 +20,29 @@ public class DegreeController {
 
     @Autowired
     lateinit var degreeRepository: DegreeRepository
-
     @GetMapping("/user/{userId}/degrees")
-    fun getAllDegreesByTutorialId(
+    fun getAllDegreesByUserId(
         @PathVariable(value = "userId") userId: Long
     ): ResponseEntity<List<Degree>>? {
         val degrees: List<Degree> = degreeRepository.findByUserId(userId)
         return ResponseEntity<List<Degree>>(degrees, HttpStatus.OK)
     }
 
+    @GetMapping("/user/{userId}/degrees/status/{status}")
+    fun getAllDegreesByUserIdAndStatus(
+        @PathVariable(value = "userId") userId: Long,
+        @PathVariable(value = "status") status: Int
+    ): ResponseEntity<List<Degree>>? {
+        val degrees: List<Degree> = degreeRepository.findByUserIdAndStatus(userId, status)
+        return ResponseEntity<List<Degree>>(degrees, HttpStatus.OK)
+    }
+
     @GetMapping("/degree/{id}")
-    fun getDegreeById(@PathVariable(value = "id") id: Long): ResponseEntity<Degree?>? {
+    fun getDegreeById(
+        @PathVariable(value = "id") id: Long
+    ): ResponseEntity<Degree?>? {
         val degree: Degree = degreeRepository.findById(id)
-            .orElseThrow { AccountException("Not found Comment with id = $id") }
+            .orElseThrow{ AccountException("Not found user")}
         return ResponseEntity<Degree?>(degree, HttpStatus.OK)
     }
 
@@ -54,7 +64,7 @@ public class DegreeController {
         @Valid @RequestBody degree: Degree,
     ) : ResponseEntity<Degree>? {
         if (!degreeRepository.existsById(id)) {
-            throw AccountException("Not found degree with id = " + id);
+            throw AccountException("Not found degree with id = $id");
         }
         return degreeRepository.findById(id).map { existingDegree ->
             val updateDegree: Degree = existingDegree
@@ -77,7 +87,7 @@ public class DegreeController {
         @Valid @RequestBody degree: Degree,
     ) : ResponseEntity<Degree>? {
         if (!degreeRepository.existsById(id)) {
-            throw AccountException("Not found degree with id = " + id);
+            throw AccountException("Not found degree with id = $id");
         }
         return degreeRepository.findById(id).map { existingDegree ->
             val updateDegree: Degree = existingDegree
@@ -89,7 +99,7 @@ public class DegreeController {
     @DeleteMapping("/degree/{id}")
     fun deleteDegree(@PathVariable("id") id: Long): ResponseEntity<HttpStatus?>? {
         if (!degreeRepository.existsById(id)) {
-            throw AccountException("Not found degree with id = " + id);
+            throw AccountException("Not found degree with id = $id");
         }
         degreeRepository.deleteById(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)

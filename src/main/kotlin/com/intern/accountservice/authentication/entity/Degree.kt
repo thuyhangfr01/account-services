@@ -27,7 +27,7 @@ data class Degree (
     var dateOfExpiry: String? = "",
 
     @Column(name = "status")
-    var status: String? = "0",
+    var status: Int? = 0,
 
     @Column(name = "img1")
     var img1: String? = null,
