@@ -18,7 +18,8 @@ class AccountException(override val message: String) : RuntimeException(message)
 class AccountExceptionHandler {
     @ExceptionHandler(AccountException::class)
     fun handleMonitoringException(ex: AccountException): ResponseEntity<Error> {
-        val error = Error(HttpStatus.BAD_REQUEST, ex.message)
+        //val error = Error(HttpStatus.BAD_REQUEST, ex.message)
+        val error = Error(HttpStatus.NOT_FOUND, ex.message)
         return ResponseEntity.badRequest().body(error)
     }
 }
