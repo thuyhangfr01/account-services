@@ -1,6 +1,8 @@
 package com.intern.accountservice.authentication.controller
 
 import com.intern.accountservice.authentication.entity.Degree
+import com.intern.accountservice.authentication.entity.JwtResponse
+import com.intern.accountservice.authentication.entity.JwtResponseStatus
 import com.intern.accountservice.authentication.exception.AccountException
 import com.intern.accountservice.authentication.repository.DegreeRepository
 import com.intern.accountservice.authentication.repository.UserRepository
@@ -97,11 +99,12 @@ public class DegreeController {
     }
 
     @DeleteMapping("/degree/{id}")
-    fun deleteDegree(@PathVariable("id") id: Long): ResponseEntity<HttpStatus?>? {
+    fun deleteDegree(@PathVariable("id") id: Long): JwtResponseStatus {
         if (!degreeRepository.existsById(id)) {
             throw AccountException("Not found degree with id = $id");
         }
         degreeRepository.deleteById(id)
-        return ResponseEntity(HttpStatus.NO_CONTENT)
+        val status = HttpStatus.OK
+        return JwtResponseStatus(status)
     }
 }
