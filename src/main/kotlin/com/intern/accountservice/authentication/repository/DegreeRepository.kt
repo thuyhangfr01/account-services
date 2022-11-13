@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface DegreeRepository : JpaRepository<Degree, Long> {
     fun findByUserId(userId: Long?): List<Degree>
+    fun findByStatus(status: Int?): List<Degree>
     fun findByUserIdAndStatus(userId: Long?, status: Int?): List<Degree>
 }

@@ -48,6 +48,14 @@ public class DegreeController {
         return ResponseEntity<Degree?>(degree, HttpStatus.OK)
     }
 
+    @GetMapping("/degrees/{status}")
+    fun getAllDegreesByStatus(
+        @PathVariable(value = "status") status: Int
+    ): ResponseEntity<List<Degree>>? {
+        val degrees: List<Degree> = degreeRepository.findByStatus(status)
+        return ResponseEntity<List<Degree>>(degrees, HttpStatus.OK)
+    }
+
     @PostMapping("/user/{userId}/degrees")
     fun createDegrees(
         @PathVariable(value = "userId") userId: Long,
@@ -83,7 +91,7 @@ public class DegreeController {
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    @PutMapping("/degree/status/{id}")
+    @PutMapping("/degree/{id}/status")
     fun updateStatusOfDegree(
         @PathVariable("id") id: Long,
         @Valid @RequestBody degree: Degree,
